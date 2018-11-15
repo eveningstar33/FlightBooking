@@ -1,20 +1,14 @@
 package com.dgs.flightreservation.entities;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Reservation {
 
-	private Long id;
 	private Boolean checkedIn;
 	private int numberOfBags;
 	private Passenger passenger;
 	private Flight flight;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Boolean getCheckedIn() {
 		return checkedIn;
