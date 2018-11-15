@@ -1,13 +1,18 @@
 package com.dgs.flightreservation.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Reservation {
 
 	private Boolean checkedIn;
 	private int numberOfBags;
+	
+	@OneToOne
 	private Passenger passenger;
+	
+	@OneToOne
 	private Flight flight;
 
 	public Boolean getCheckedIn() {
