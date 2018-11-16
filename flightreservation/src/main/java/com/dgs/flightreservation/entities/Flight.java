@@ -6,7 +6,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 
 @Entity
-public class Flight {
+public class Flight extends AbstractEntity {
 
 	private String flightNumber;
 	private String operatingAirlines;
