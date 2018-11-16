@@ -9,6 +9,7 @@
 <body>
 	<form action="registerUser" method="POST">
 		<pre>
+			<h2>User Registration: </h2>
 			First Name <input type="text" name="firstName" />
 			Last Name <input type="text" name="lastName" />
 			Email <input type="text" name="email" />
