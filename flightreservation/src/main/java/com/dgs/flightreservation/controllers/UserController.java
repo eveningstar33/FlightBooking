@@ -28,6 +28,11 @@ public class UserController {
 		return "login/login";
 	}
 	
+	@RequestMapping("/showLogin")
+	public String showLoginPage() {
+		return "login/loginUser";
+	}
+	
 	@PostMapping("/login")
 	public String login(@RequestParam String email, @RequestParam String password, ModelMap modelMap) {
 		User user = userRepository.findByEmail(email); 

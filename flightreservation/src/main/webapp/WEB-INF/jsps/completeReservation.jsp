@@ -23,7 +23,7 @@
 			Phone: <input type="text" name="passengerPhone" />
 			
 			<h2>Card Details:</h2>
-			First Name: <input type="text" name="nameOnTheCard" />
+			Name on the card: <input type="text" name="nameOnTheCard" />
 			Card No: <input type="text" name="cardNumber" />
 			Expiry Date: <input type="text" name="expirationDate" />
 			Three Digit Sec Code: <input type="text" name="securityCode" />
