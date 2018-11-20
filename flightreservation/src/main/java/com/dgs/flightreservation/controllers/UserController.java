@@ -30,7 +30,7 @@ public class UserController {
 	
 	@RequestMapping("/showLogin")
 	public String showLoginPage() {
-		return "login/loginUser";
+		return "login/login";
 	}
 	
 	@PostMapping("/login")
