@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dgs.flightreservation.dto.ReservationUpdateRequest;
@@ -25,8 +26,14 @@ public class ReservationRestController {
 		return reservationRepository.findById(id).get();
 	}
 	
+	/*
+	  @RequestBody tells Spring that at runtime, this object should be constructed using the content 
+	  that comes in the request, which is the JSON in our case. This request when it comes in, Spring
+	  will deserialize that JSON into this 
+	*/
+	
 	@PutMapping("/reservations")
-	public Reservation updateReservation(ReservationUpdateRequest request) {
+	public Reservation updateReservation(@RequestBody ReservationUpdateRequest request) {
 		
 		/*
 		  We are creating this 'request' because we don't want to pass in the entire reservation to do this update.
@@ -35,7 +42,7 @@ public class ReservationRestController {
 		*/
 		
 		Reservation reservation = reservationRepository.findById(request.getId()).get();  
-		reservation.setCheckedIn(request.getCheckIn()); 
+		reservation.setCheckedIn(request.getCheckedIn()); 
 		reservation.setNumberOfBags(request.getNumberOfBags()); 
 		return reservationRepository.save(reservation); 
 	}
