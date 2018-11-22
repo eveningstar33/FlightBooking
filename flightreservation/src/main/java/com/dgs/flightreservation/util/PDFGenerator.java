@@ -47,6 +47,9 @@ public class PDFGenerator {
 		cell.setColspan(2);
 		table.addCell(cell);
 		
+		table.addCell("Airlines");
+		table.addCell(reservation.getFlight().getOperatingAirlines()); 
+		
 		table.addCell("Departure City");
 		table.addCell(reservation.getFlight().getDepartureCity()); 
 		
@@ -61,6 +64,22 @@ public class PDFGenerator {
 		
 		table.addCell("Departure Time");
 		table.addCell(reservation.getFlight().getEstimatedDepartureTime().toString()); 
+		
+		cell = new PdfPCell(new Phrase("Passenger Details:"));
+		cell.setColspan(2);
+		table.addCell(cell);
+		
+		table.addCell("First Name");
+		table.addCell(reservation.getPassenger().getFirstName()); 
+		
+		table.addCell("Last Name");
+		table.addCell(reservation.getPassenger().getLastName()); 
+		
+		table.addCell("Email");
+		table.addCell(reservation.getPassenger().getEmail()); 
+		
+		table.addCell("Email");
+		table.addCell(reservation.getPassenger().getPhone()); 
 		return table;
 	}
 }
