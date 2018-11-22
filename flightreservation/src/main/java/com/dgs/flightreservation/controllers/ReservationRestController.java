@@ -1,11 +1,9 @@
 package com.dgs.flightreservation.controllers;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,7 +30,7 @@ public class ReservationRestController {
 	  will deserialize that JSON into this 
 	*/
 	
-	@PutMapping("/reservations")
+	@PostMapping("/reservations")
 	public Reservation updateReservation(@RequestBody ReservationUpdateRequest request) {
 		
 		/*

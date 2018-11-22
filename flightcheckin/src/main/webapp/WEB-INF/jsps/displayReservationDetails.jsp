@@ -9,23 +9,23 @@
 <body>
 	<h2>Flight Details:</h2>
 	
-	Airlines: ${reservation.flight.operatingAirlines}
-	Flight No: ${reservation.flight.flightNumber}
-	Departure City: ${reservation.flight.departureCity}
-	Arrival City: ${reservation.flight.arrivalCity}
-	Date Of Departure: ${reservation.flight.dateOfDeparture}
-	Estimated Departure Time: ${reservation.flight.estimatedDepartureTime}
+	Airlines: ${reservation.flight.operatingAirlines}<br/>
+	Flight No: ${reservation.flight.flightNumber}<br/>
+	Departure City: ${reservation.flight.departureCity}<br/>
+	Arrival City: ${reservation.flight.arrivalCity}<br/>
+	Date Of Departure: ${reservation.flight.dateOfDeparture}<br/>
+	Estimated Departure Time: ${reservation.flight.estimatedDepartureTime}<br/>
 	
 	<h2>Passenger Details:</h2>
 	
-	First Name: ${reservation.passenger.firstName}
-	Last Name: ${reservation.passenger.lastName}
-	Email: ${reservation.passenger.email}
-	Phone: ${reservation.passenger.phone}
+	First Name: ${reservation.passenger.firstName}<br/>
+	Last Name: ${reservation.passenger.lastName}<br/>
+	Email: ${reservation.passenger.email}<br/>
+	Phone: ${reservation.passenger.phone}<br/>
 
 	<form action="completeCheckIn" method="POST">
 		Enter the Number Of Bags you want to check in: <input type="text" name="numberOfBags" />
-		<input type="hidden" value="${reservation.id}" />
+		<input type="hidden" value="${reservation.id}" name="reservationId"/>
 		<input type="submit" value="Check In" />
 	</form>
 	
