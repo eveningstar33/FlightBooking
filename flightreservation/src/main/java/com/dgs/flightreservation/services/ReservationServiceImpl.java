@@ -10,6 +10,8 @@ import com.dgs.flightreservation.entities.Reservation;
 import com.dgs.flightreservation.repos.FlightRepository;
 import com.dgs.flightreservation.repos.PassengerRepository;
 import com.dgs.flightreservation.repos.ReservationRepository;
+import com.dgs.flightreservation.util.EmailUtil;
+import com.dgs.flightreservation.util.PDFGenerator;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -22,6 +24,12 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Autowired
 	private ReservationRepository reservationRepository;
+	
+	@Autowired
+	private PDFGenerator pdfGenerator;
+	
+	@Autowired
+	private EmailUtil emailUtil;
 
 	/*
 	 * The reason for we've created a service layer class is because we're making
@@ -61,7 +69,12 @@ public class ReservationServiceImpl implements ReservationService {
 		reservation.setFlight(flight);
 		reservation.setPassenger(savedPassenger);
 		reservation.setCheckedIn(false);      // The passenger will be checked in later on, using the checkin app that
+		
 		Reservation savedReservation = reservationRepository.save(reservation);
+		
+		String filePath = "/D:/Spring Boot/Spring-Micro-Services/03.microservices/reservations/reservation" + savedReservation.getId() + ".pdf";
+		pdfGenerator.generateItinerary(savedReservation, filePath);  
+		emailUtil.sendItinerary(passenger.getEmail(), filePath); 
 
 		return savedReservation;
 	}
