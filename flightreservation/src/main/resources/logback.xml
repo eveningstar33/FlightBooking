@@ -4,5 +4,8 @@
 	<property name="FILE_PREFIX" value="flightreservation" />
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_DIR}/${FILE_PREFIX}.log</file>
+		<encoder>
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</Pattern>
+		</encoder>
 	</appender>
 </configuration>
