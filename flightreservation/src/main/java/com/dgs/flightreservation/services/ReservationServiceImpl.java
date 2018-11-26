@@ -1,5 +1,7 @@
 package com.dgs.flightreservation.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,8 @@ public class ReservationServiceImpl implements ReservationService {
 	
 	@Autowired
 	private EmailUtil emailUtil;
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ReservationServiceImpl.class);  
 
 	/*
 	 * The reason for we've created a service layer class is because we're making
@@ -41,6 +45,7 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public Reservation bookFlight(ReservationRequest request) {
 
+		LOGGER.info("Inside bookFlight()");
 		/*
 		 * The first step is would be tipically to make a payment. We are not going to
 		 * do that. You can retrieve a card number and all that and we can invoke a
@@ -54,6 +59,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 		// Retrieve the flight
 		Long flightId = request.getFlightId();
+		LOGGER.info("Fetching flight for flight id: " + flightId);
 		Flight flight = flightRepository.findById(flightId).get();
 
 		// Save the passenger information
@@ -62,6 +68,7 @@ public class ReservationServiceImpl implements ReservationService {
 		passenger.setLastName(request.getPassengerLastName());
 		passenger.setEmail(request.getPassengerEmail());
 		passenger.setPhone(request.getPassengerPhone());
+		LOGGER.info("Saving the passenger: " + passenger);
 		Passenger savedPassenger = passengerRepository.save(passenger);
 
 		// Create the reservation
@@ -70,10 +77,14 @@ public class ReservationServiceImpl implements ReservationService {
 		reservation.setPassenger(savedPassenger);
 		reservation.setCheckedIn(false);      // The passenger will be checked in later on, using the checkin app that
 		
+		LOGGER.info("Saving the reservation: " + reservation);
 		Reservation savedReservation = reservationRepository.save(reservation);
 		
-		String filePath = "/D:/Spring Boot/Spring-Micro-Services/03.microservices/reservations/reservation" + savedReservation.getId() + ".pdf";
-		pdfGenerator.generateItinerary(savedReservation, filePath);  
+		String filePath = "/D:/Spring Boot/Spring-Micro-Services/03.microservices/reservations/reservation" 
+							+ savedReservation.getId() + ".pdf";
+		LOGGER.info("Generating the itinerary");
+		pdfGenerator.generateItinerary(savedReservation, filePath); 
+		LOGGER.info("Emailing the itinerary");
 		emailUtil.sendItinerary(passenger.getEmail(), filePath); 
 
 		return savedReservation;
