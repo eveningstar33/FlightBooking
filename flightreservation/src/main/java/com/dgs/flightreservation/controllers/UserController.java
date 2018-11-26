@@ -24,28 +24,26 @@ public class UserController {
 
 	@RequestMapping("/showReg")
 	public String showRegistrationPage() {
+		LOGGER.info("Inside showRegistrationPage()");
 		return "login/registerUser";
 	}
 	
 	@PostMapping("/registerUser")
 	public String register(@ModelAttribute User user) {
+		LOGGER.info("Inside register()" + user);   // User should have toString method
 		userRepository.save(user); 
 		return "login/login";
 	}
 	
 	@RequestMapping("/showLogin")
 	public String showLoginPage() {
+		LOGGER.info("Inside showLoginPage()");
 		return "login/login";
 	}
 	
 	@PostMapping("/login")
 	public String login(@RequestParam String email, @RequestParam String password, ModelMap modelMap) {
-		LOGGER.error("ERROR");
-		LOGGER.warn("WARN");
-		LOGGER.info("INFO");
-		LOGGER.debug("DEBUG");
-		LOGGER.trace("TRACE");
-
+		LOGGER.info("Inside login() and the email is: " + email);
 		User user = userRepository.findByEmail(email); 
 		if (user.getPassword().equals(password)) {
 			return "findFlights";
