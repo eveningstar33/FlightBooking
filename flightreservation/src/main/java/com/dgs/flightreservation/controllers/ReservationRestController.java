@@ -1,5 +1,7 @@
 package com.dgs.flightreservation.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +21,12 @@ public class ReservationRestController {
 	@Autowired
 	private ReservationRepository reservationRepository;
 	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ReservationRestController.class);  
+
+	
 	@GetMapping("/reservations/{id}")
 	public Reservation findReservation(@PathVariable Long id) {
+		LOGGER.info("Inside findReservation() for id: " + id);
 		return reservationRepository.findById(id).get();
 	}
 	
@@ -32,7 +38,7 @@ public class ReservationRestController {
 	
 	@PostMapping("/reservations")
 	public Reservation updateReservation(@RequestBody ReservationUpdateRequest request) {
-		
+		LOGGER.info("Inside updateReservation() for " + request);
 		/*
 		  We are creating this 'request' because we don't want to pass in the entire reservation to do this update.
 		  The client need not pass in the entire reservation. Simply he'll use this ReservationUpdateRequest wrapper 
@@ -42,6 +48,7 @@ public class ReservationRestController {
 		Reservation reservation = reservationRepository.findById(request.getId()).get();  
 		reservation.setCheckedIn(request.getCheckedIn()); 
 		reservation.setNumberOfBags(request.getNumberOfBags()); 
+		LOGGER.info("Saving Reservation");
 		return reservationRepository.save(reservation); 
 	}
 
