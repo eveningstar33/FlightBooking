@@ -12,3 +12,5 @@ First Name: {{data?.passenger?.firstName}}<br/>
 Last Name: {{data?.passenger?.lastName}}<br/>
 First Name: {{data?.passenger?.email}}<br/>
 First Name: {{data?.passenger?.phone}}<br/>
+Enter the number of bags you want to checkin: <input type="text" [(ngModel)]="noOfBags" /><br/>
+<button (click)="checkin(noOfBags)">CheckIn</button>
