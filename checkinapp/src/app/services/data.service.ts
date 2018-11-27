@@ -8,15 +8,24 @@ import { Observable } from 'rxjs';
 })
 export class DataService {
 
+  url:string = 'http://localhost:8080/flightreservation/reservations/';
+
   constructor(private _http:Http) { }
 
   public getReservation(id:number):any {
-      return this._http.get('http://localhost:8080/flightreservation/reservations/' + id)
+      return this._http.get(this.url + id)
       .pipe(map(response => {
           return response.json();
       }, 
       error => {
           console.error(error);
+      }))
+  }
+
+  public checkin(checkInRequest):any {
+      return this._http.post(this.url, checkInRequest)
+      .pipe(map(response => {
+          return response.json();
       }))
   }
 }
