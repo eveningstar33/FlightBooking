@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { StartcheckinComponent } from './components/startcheckin/startcheckin.component';
 import { CheckinComponent } from './components/checkin/checkin.component';
 import { ConfirmcheckinComponent } from './components/confirmcheckin/confirmcheckin.component';
+import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
+import { DataService } from './services/data.service';
 
 @NgModule({
   declarations: [
@@ -16,9 +19,11 @@ import { ConfirmcheckinComponent } from './components/confirmcheckin/confirmchec
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule, 
+    HttpModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
